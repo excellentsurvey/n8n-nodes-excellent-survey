@@ -1,0 +1,28 @@
+{
+  "name": "n8n-nodes-excellent-survey",
+  "version": "1.0.0",
+  "description": "Excellent Survey response trigger with OAuth2 and automatic subscriptions",
+  "license": "MIT",
+  "homepage": "https://excellentsurvey.com",
+  "author": { "name": "Excellent Survey", "email": "support@excellentsurvey.com" },
+  "keywords": ["n8n-community-node-package", "survey", "excellent-survey"],
+  "engines": { "node": ">=24" },
+  "files": ["dist", "README.md", "LICENSE", "examples"],
+  "scripts": {
+    "build": "n8n-node build",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "dev": "n8n-node dev",
+    "test": "npm run build && node --test tests/*.test.cjs",
+    "prepublishOnly": "npm run lint && npm test"
+  },
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "strict": true,
+    "credentials": ["dist/credentials/ExcellentSurveyOAuth2Api.credentials.js"],
+    "nodes": ["dist/nodes/ExcellentSurvey/ExcellentSurveyTrigger.node.js"]
+  },
+  "peerDependencies": { "n8n-workflow": "*" },
+  "devDependencies": { "@n8n/node-cli": "0.47.2", "n8n-workflow": "2.16.0", "typescript": "5.9.3", "@types/node": "22.15.30" },
+  "publishConfig": { "access": "public" }
+}

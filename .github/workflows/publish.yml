@@ -1,0 +1,77 @@
+name: Publish package
+
+# Only an explicit dispatch can publish. Pushing code or tags runs no release.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Exact package.json version to publish
+        required: true
+        type: string
+      authentication:
+        description: Trusted publisher for existing packages; token only for first publication
+        required: true
+        type: choice
+        default: trusted
+        options:
+          - trusted
+          - first-publication-token
+      confirm_publish:
+        description: Publish this version publicly on npm after checks pass
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # If using npm trusted publishing, its environment must match this name.
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24.21.0'
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+      - name: Validate release identity and registry state
+        run: node .github/scripts/check-release.cjs
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+          RELEASE_AUTHENTICATION: ${{ inputs.authentication }}
+          CONFIRM_PUBLISH: ${{ inputs.confirm_publish }}
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - name: Inspect publishable files
+        run: npm pack --dry-run --ignore-scripts
+      - name: Publish with npm trusted publishing
+        if: inputs.authentication == 'trusted'
+        run: npm publish --provenance --access public --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ''
+      - name: First publication with a temporary npm token
+        if: inputs.authentication == 'first-publication-token'
+        shell: bash
+        run: |
+          if [[ -z "$NODE_AUTH_TOKEN" ]]; then
+            echo '::error::Add NPM_TOKEN to the npm GitHub environment before the first publication.'
+            exit 1
+          fi
+          npm publish --provenance --access public --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

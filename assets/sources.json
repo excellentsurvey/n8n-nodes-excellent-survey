@@ -1,0 +1,13 @@
+{
+  "n8n.svg": {
+    "source": "https://raw.githubusercontent.com/n8n-io/n8n/master/packages/frontend/%40n8n/design-system/src/components/N8nLogo/logo-icon.svg",
+    "page": "https://github.com/n8n-io/n8n/tree/master/packages/frontend/%40n8n/design-system/src/components/N8nLogo",
+    "retrieved": "2026-09-11",
+    "unmodified": true,
+    "sha256": "fea58f324bd105a5d8a054e6cb80940c1e63fc51b606b780b73e9187e5bfdfa9"
+  },
+  "excellent-survey": {
+    "source": "public/logo-mark.svg (repository root)",
+    "note": "Existing Excellent Survey mark. Make icon.png is a transparent 512px rasterization; paths unchanged."
+  }
+}

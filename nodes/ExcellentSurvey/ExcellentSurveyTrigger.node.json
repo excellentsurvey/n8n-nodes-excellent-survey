@@ -1,0 +1,15 @@
+{
+  "node": "n8n-nodes-excellent-survey.excellentSurveyTrigger",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "categories": ["Communication"],
+  "resources": {
+    "credentialDocumentation": [
+      { "url": "https://www.npmjs.com/package/n8n-nodes-excellent-survey" }
+    ],
+    "primaryDocumentation": [
+      { "url": "https://www.npmjs.com/package/n8n-nodes-excellent-survey" }
+    ]
+  },
+  "alias": ["Form", "Survey", "Response"]
+}

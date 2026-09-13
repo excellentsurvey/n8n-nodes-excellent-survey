@@ -1,0 +1,17 @@
+{
+  "name": "Excellent Survey - Watch Responses",
+  "nodes": [
+    {
+      "parameters": { "surveyId": "" },
+      "id": "b7f3d50f-1265-427f-90f6-d608b451bb5e",
+      "name": "Excellent Survey Trigger",
+      "type": "n8n-nodes-excellent-survey.excellentSurveyTrigger",
+      "typeVersion": 1,
+      "position": [260, 300]
+    }
+  ],
+  "connections": {},
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "pinData": {}
+}

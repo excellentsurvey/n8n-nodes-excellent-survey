@@ -1,0 +1,86 @@
+{
+  "version": "1",
+  "eventId": "event_fixture_1",
+  "event": "response.completed",
+  "test": false,
+  "occurredAt": "2026-09-11T12:00:00.000Z",
+  "survey": {
+    "id": "survey_fixture",
+    "title": "Synthetic connector fixture / استبيان"
+  },
+  "response": {
+    "id": "response_fixture",
+    "completedAt": "2026-09-11T12:00:00.000Z",
+    "answers": [
+      {
+        "questionId": "q_zero",
+        "type": "NUMBER",
+        "title": "Same title",
+        "value": 0,
+        "displayValue": 0
+      },
+      {
+        "questionId": "q_false",
+        "type": "BOOLEAN",
+        "title": "Same title",
+        "value": false,
+        "displayValue": false
+      },
+      {
+        "questionId": "q_multi",
+        "type": "MULTIPLE_CHOICE",
+        "title": "التفضيلات",
+        "value": [
+          "option_a",
+          "other"
+        ],
+        "displayValue": [
+          "First option",
+          "Other"
+        ]
+      },
+      {
+        "questionId": "q_matrix",
+        "type": "MATRIX",
+        "title": "Matrix",
+        "value": {
+          "row_a": {
+            "col_b": 2
+          },
+          "other": "Keep me"
+        },
+        "displayValue": {
+          "row_a": {
+            "col_b": 2
+          },
+          "other": "Keep me"
+        }
+      },
+      {
+        "questionId": "q_upload",
+        "type": "FILE_UPLOAD",
+        "title": "File",
+        "value": [
+          "https://excellentsurvey.com/api/files/synthetic-file"
+        ],
+        "displayValue": [
+          "https://excellentsurvey.com/api/files/synthetic-file"
+        ]
+      },
+      {
+        "questionId": "q_empty",
+        "type": "SHORT_TEXT",
+        "title": "Empty",
+        "value": "",
+        "displayValue": ""
+      },
+      {
+        "questionId": "q_null",
+        "type": "SHORT_TEXT",
+        "title": "No answer",
+        "value": null,
+        "displayValue": null
+      }
+    ]
+  }
+}
