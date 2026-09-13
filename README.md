@@ -6,7 +6,7 @@ The connector has been tested on a self-hosted n8n **2.38.7** instance with Node
 
 ## Instance setup
 
-1. Use Node 24 or newer for development. The connector is built against `n8n-workflow` 2.16.0; its peer dependency follows n8n's required `*` convention, which does not establish compatibility with every historical release. Build and pack this directory using the commands below. Install the resulting tarball in your self-hosted test instance's custom/community nodes location according to its deployment method, then restart that test instance.
+1. In your self-hosted n8n instance, sign in as an owner or administrator. Open **Settings → Community nodes → Install**, enter **`n8n-nodes-excellent-survey`**, and follow the installation prompts. See [n8n's community-node installation instructions](https://docs.n8n.io/integrations/community-nodes/installation-and-management/gui-installation/). The [published npm package](https://www.npmjs.com/package/n8n-nodes-excellent-survey) is available for self-hosted installations; n8n Cloud availability requires n8n verification.
 2. Expose n8n's webhook endpoint through **public HTTPS**. The website must be able to reach it. A localhost callback or a private network address is not a supported receiving destination.
 3. Create an **Excellent Survey OAuth2 API** credential. Contact **support@excellentsurvey.com** with its **OAuth Redirect URL** for exact callback registration. Enter the issued client ID and secret in n8n's encrypted credential fields. Then select **Connect my account**, sign in, and approve survey access.
 4. Add **Excellent Survey Trigger**, select the credential and a survey, then activate/publish the workflow in n8n. The node automatically registers its callback. Deactivation removes that callback's subscription. A test listener has a separate subscription so it cannot remove the production subscription.
@@ -15,6 +15,8 @@ The connector has been tested on a self-hosted n8n **2.38.7** instance with Node
 No application client secret is bundled in this npm package. Self-hosted n8n instances have different OAuth redirect URLs, so an unregistered instance cannot have universal one-click OAuth. This is the same callback-registration constraint documented for [n8n's Typeform OAuth2 credential](https://docs.n8n.io/integrations/builtin/credentials/typeform/). The user never pastes a webhook URL; the one-time operator step registers the OAuth client, then n8n manages webhook subscriptions.
 
 ## Build and test
+
+For development, use Node 24 or newer. The connector is built against `n8n-workflow` 2.16.0; its peer dependency follows n8n's required `*` convention, which does not establish compatibility with every historical release. You can build and pack this directory to install a local development tarball in a separate self-hosted test instance.
 
 ```sh
 npm ci
